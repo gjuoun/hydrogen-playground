@@ -16,7 +16,7 @@ import Layout from '../components/Layout.server';
 import FeaturedCollection from '../components/FeaturedCollection';
 import ProductCard from '../components/ProductCard';
 import Welcome from '../components/Welcome.server';
-import {Suspense} from 'react';
+import {Suspense, useEffect} from 'react';
 
 export default function Index({country = {isoCode: 'US'}}) {
   return (
@@ -25,6 +25,7 @@ export default function Index({country = {isoCode: 'US'}}) {
         <SeoForHomepage />
       </Suspense>
       <div className="relative mb-12">
+        <MyComponent />
         <Welcome />
         <Suspense fallback={<BoxFallback />}>
           <FeaturedProductsBox country={country} />
@@ -36,6 +37,27 @@ export default function Index({country = {isoCode: 'US'}}) {
     </Layout>
   );
 }
+
+const MyComponent = () => {
+  const {
+    data: {
+      shop: {name},
+    },
+  } = useShopQuery({query: MY_QUERY});
+  // Return the product title.
+  return <h1>{name}</h1>;
+};
+
+const MY_QUERY = gql`
+  query {
+    shop {
+      id
+      name
+      description
+      moneyFormat
+    }
+  }
+`;
 
 function SeoForHomepage() {
   const {
