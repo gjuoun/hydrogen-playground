@@ -6,7 +6,7 @@ import DefaultSeo from './components/DefaultSeo.server';
 import NotFound from './components/NotFound.server';
 import LoadingFallback from './components/LoadingFallback';
 import CartProvider from './components/CartProvider.client';
-// import {ThemeProvider} from '@mui/material';
+import {CssBaseline, ThemeProvider} from '@mui/material';
 
 function App({routes, ...serverProps}) {
   return (
@@ -18,7 +18,10 @@ function App({routes, ...serverProps}) {
             fallback={<NotFound response={serverProps.response} />}
             serverProps={serverProps}
           >
-            <FileRoutes routes={routes} />
+            <CssBaseline />
+            <ThemeProvider theme={{}}>
+              <FileRoutes routes={routes} />
+            </ThemeProvider>
           </Router>
         </CartProvider>
       </ShopifyProvider>

@@ -2,7 +2,7 @@ import {useShopQuery, flattenConnection} from '@shopify/hydrogen';
 import {ProductProviderFragment} from '@shopify/hydrogen/fragments';
 import gql from 'graphql-tag';
 
-import ServerLayout from './Layout.server';
+import ServerLayout from './shared/Layout.server';
 import Button from './Button.client';
 import ProductCard from './ProductCard';
 

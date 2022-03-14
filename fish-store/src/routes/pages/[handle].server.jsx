@@ -2,7 +2,7 @@ import {useShopQuery, RawHtml, Seo} from '@shopify/hydrogen';
 import {PageSeoFragment} from '@shopify/hydrogen/fragments';
 import gql from 'graphql-tag';
 
-import Layout from '../../components/Layout.server';
+import Layout from '../../components/shared/Layout.server';
 import NotFound from '../../components/NotFound.server';
 
 export default function Page({params}) {

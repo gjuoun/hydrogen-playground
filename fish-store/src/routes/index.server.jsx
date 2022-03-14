@@ -8,7 +8,7 @@ import {
 // The `ProductProviderFragment` queries for all the product data you need for a component.
 import {ProductProviderFragment} from '@shopify/hydrogen/fragments';
 // Import the `Layout` component that defines the structure of the page.
-import ServerLayout from '../components/Layout.server';
+import ServerLayout from '../components/shared/Layout.server';
 // Import the `ProductList` component that defines the products to display.
 // Import `gql` to parse GraphQL queries.
 import gql from 'graphql-tag';
