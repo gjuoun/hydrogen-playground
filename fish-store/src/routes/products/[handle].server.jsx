@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 
 import ProductDetails from '../../components/ProductDetails.client';
 import NotFound from '../../components/NotFound.server';
-import Layout from '../../components/Layout.server';
+import ServerLayout from '../../components/Layout.server';
 
 export default function Product({country = {isoCode: 'US'}, params}) {
   const {handle} = params;
@@ -28,10 +28,10 @@ export default function Product({country = {isoCode: 'US'}, params}) {
   }
 
   return (
-    <Layout>
+    <ServerLayout>
       <Seo type="product" data={product} />
       <ProductDetails product={product} />
-    </Layout>
+    </ServerLayout>
   );
 }
 

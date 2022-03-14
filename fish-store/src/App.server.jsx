@@ -6,6 +6,7 @@ import DefaultSeo from './components/DefaultSeo.server';
 import NotFound from './components/NotFound.server';
 import LoadingFallback from './components/LoadingFallback';
 import CartProvider from './components/CartProvider.client';
+// import {ThemeProvider} from '@mui/material';
 
 function App({routes, ...serverProps}) {
   return (
