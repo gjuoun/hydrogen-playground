@@ -22,6 +22,8 @@ export default function Header({collections, storeName}) {
     setScrollbarWidth(scrollbarWidth);
   }, [isCartOpen]);
 
+  console.log(storeName);
+
   return (
     <header className="h-20 lg:h-32" role="banner">
       <div
@@ -46,7 +48,7 @@ export default function Header({collections, storeName}) {
               className="font-black uppercase text-3xl tracking-widest"
               to="/"
             >
-              {storeName}
+              Shrimp Lover {'&'} Tropical Fish
             </Link>
             <CartToggle
               handleClick={() => {

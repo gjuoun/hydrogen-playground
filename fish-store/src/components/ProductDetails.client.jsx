@@ -26,18 +26,8 @@ function AddToCartMarkup() {
         className={BUTTON_PRIMARY_CLASSES}
         disabled={isOutOfStock}
       >
-        {isOutOfStock ? 'Out of stock' : 'Add to bag'}
+        {isOutOfStock ? 'Out of stock' : 'Add to cart'}
       </AddToCartButton>
-      {isOutOfStock ? (
-        <p className="text-black text-center">Available in 2-3 weeks</p>
-      ) : (
-        <BuyNowButton
-          variantId={selectedVariant.id}
-          className={BUTTON_SECONDARY_CLASSES}
-        >
-          Buy it now
-        </BuyNowButton>
-      )}
     </div>
   );
 }
@@ -107,15 +97,17 @@ export default function ProductDetails({product}) {
       metafield.namespace === 'my_fields' &&
       metafield.key === 'lifetime_warranty',
   );
+  console.log(product.vendor);
 
   return (
     <>
       <ProductProvider data={product} initialVariantId={initialVariant.id}>
         <div className="grid grid-cols-1 md:grid-cols-[2fr,1fr] gap-x-8 my-16">
+          {/* hide under md */}
           <div className="md:hidden mt-5 mb-8">
             <ProductTitle
               as="h1"
-              className="text-4xl font-bold text-black mb-4"
+              className="text-4xl font-bold text-red-500 mb-4"
             />
             {product.vendor && (
               <div className="text-sm font-medium mb-2 text-gray-900">
@@ -139,10 +131,12 @@ export default function ProductDetails({product}) {
           <Gallery />
 
           <div>
+            {/* available equal and above md */}
+
             <div className="hidden md:block">
               <ProductTitle
                 as="h1"
-                className="text-5xl font-bold text-black mb-4"
+                className="text-5xl font-bold text-purple-600 mb-4"
               />
               {product.vendor && (
                 <div className="text-sm font-medium mb-2 text-gray-900">

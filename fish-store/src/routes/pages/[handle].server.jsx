@@ -14,6 +14,7 @@ export default function Page({params}) {
   }
 
   const page = data.pageByHandle;
+  console.log(page);
 
   return (
     <Layout>

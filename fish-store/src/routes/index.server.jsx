@@ -10,13 +10,12 @@ import {ProductProviderFragment} from '@shopify/hydrogen/fragments';
 // Import the `Layout` component that defines the structure of the page.
 import Layout from '../components/Layout.server';
 // Import the `ProductList` component that defines the products to display.
-import ProductList from '../components/ProductList';
 // Import `gql` to parse GraphQL queries.
 import gql from 'graphql-tag';
-import LoadMore from '../components/LoadMore.client';
+import {HomeView} from '../views/home/Home.client';
 // Fetch product data from your storefront by passing in a GraphQL query to the
 // `useShopQuery` server component.
-export default function Index({first = 3, ...props}) {
+export default function Index({first = 3}) {
   const {data} = useShopQuery({
     query: QUERY,
     variables: {
@@ -38,9 +37,7 @@ export default function Index({first = 3, ...props}) {
   // Return a list of products.
   return (
     <Layout>
-      <LoadMore current={first}>
-        <ProductList products={products} />
-      </LoadMore>
+      <HomeView first={first} products={products} />
     </Layout>
   );
 }
