@@ -1,64 +1,82 @@
 import {useEffect, useState} from 'react';
-import {Link} from '@shopify/hydrogen/client';
-
-import CartToggle from './CartToggle.client';
+import {
+  Box,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+  Drawer,
+  Divider,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material';
 import {useCartUI} from './CartUIProvider.client';
-import CountrySelector from './CountrySelector.client';
-import Navigation from './Navigation.client';
-import MobileNavigation from './MobileNavigation.client';
+import MenuIcon from '@mui/icons-material/Menu';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import {Link} from '@shopify/hydrogen/client';
 
 /**
  * A client component that specifies the content of the header on the website
  */
+
+const drawerWidth = 240;
+
 export default function Header({collections, storeName}) {
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const [scrollbarWidth, setScrollbarWidth] = useState(0);
   const {isCartOpen} = useCartUI();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-
-    setScrollbarWidth(scrollbarWidth);
+    console.log(collections, storeName);
   }, [isCartOpen]);
 
-  console.log(storeName);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   return (
     <header className="h-20 lg:h-32" role="banner">
-      <div
-        className={`fixed z-20 h-20 lg:h-32 w-full border-b border-gray-200 px-6 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto bg-white ${
-          isMobileNavOpen ? '' : 'bg-opacity-95'
-        }`}
-      >
-        <div
-          className="h-full flex lg:flex-col place-content-between"
-          style={{
-            paddingRight: isCartOpen ? scrollbarWidth : 0,
-          }}
-        >
-          <div className="text-center w-full flex justify-between items-center">
-            <CountrySelector />
-            <MobileNavigation
-              collections={collections}
-              isOpen={isMobileNavOpen}
-              setIsOpen={setIsMobileNavOpen}
-            />
-            <Link
-              className="font-black uppercase text-3xl tracking-widest"
-              to="/"
+      <Box sx={{flexGrow: 1}}>
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{mr: 2}}
             >
-              Shrimp Lover {'&'} Tropical Fish
-            </Link>
-            <CartToggle
-              handleClick={() => {
-                if (isMobileNavOpen) setIsMobileNavOpen(false);
-              }}
-            />
-          </div>
-          <Navigation collections={collections} storeName={storeName} />
-        </div>
-      </div>
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              Persistent drawer
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer anchor={'left'} open={open} onClose={handleDrawerClose}>
+          <List>
+            {collections.map((collection, index) => (
+              <ListItem button key={collection.id}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <Link to={`/collections/${collection.handle}`}>
+                  <ListItemText primary={collection.title} />
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+        </Drawer>
+      </Box>
     </header>
   );
 }
