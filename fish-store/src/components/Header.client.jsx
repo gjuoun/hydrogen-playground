@@ -57,7 +57,7 @@ export default function Header({collections, storeName}) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-              Persistent drawer
+              Shrimp Lover {'&'} Tropical Fish
             </Typography>
           </Toolbar>
         </AppBar>
